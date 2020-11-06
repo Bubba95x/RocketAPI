@@ -10,20 +10,19 @@ namespace API.RocketStats.AutoMapper
         public ProfileSetup()
         {
             // Dto to Model
-            CreateMap<RTMatchDto, RTMatchModel>();
+            CreateMap<RTMatchRequestDto, RTMatchModel>();
             CreateMap<RTMetaDataDto, RTMetaDataModel>();
             CreateMap<RTMatchStatsDto, RTMatchStatsModel>();
             CreateMap<RTMetaDataDto, RTMetaDataModel>();
             CreateMap<RTStatsDto, RTStatsModel>();
-            CreateMap<UserDto, UserModel>()
+            CreateMap<UserRequestDto, UserModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
             CreateMap<MatchRequestDto, MatchModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
 
             // Model to Entity
             CreateMap<MatchStatisticsModel, MatchStatisticsEntity>();
-            CreateMap<MatchModel, MatchEntity>()
-                .ForMember(dest => dest.ID, op => op.Ignore());            
+            CreateMap<MatchModel, MatchEntity>();
             CreateMap<UserModel, UserEntity>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
 
@@ -31,17 +30,21 @@ namespace API.RocketStats.AutoMapper
             // Entity to Model
             CreateMap<MatchEntity, MatchModel>();
             CreateMap<UserEntity, UserModel>();
+            CreateMap<MatchStatisticsEntity, MatchStatisticsModel>();
 
             // Model to Dto
-            CreateMap<UserModel, UserDto>();
-            CreateMap<MatchModel, MatchRequestDto>();
+            CreateMap<UserModel, UserResponseDto>();
+            CreateMap<MatchModel, MatchResponseDto>();
+            CreateMap<MatchStatisticsModel, MatchStatisticsResponseDto>();
+            CreateMap<RTMatchProcessedModel, RTMatchProcessedResponseDto>();
 
             // -------------------
             // Model to Model
             CreateMap<RTMatchModel, MatchModel>()
-                .ForMember(dest => dest.ID, op => op.MapFrom(src => src.ID))
+                .ForMember(dest => dest.RocketStatsID, op => op.MapFrom(src => src.ID))
                 .ForMember(dest => dest.MatchDate, op => op.MapFrom(src => src.Metadata.DateCollected))
-                .ForMember(dest => dest.GameMode, op => op.MapFrom(src => src.Metadata.Playlist));
+                .ForMember(dest => dest.GameMode, op => op.MapFrom(src => src.Metadata.Playlist))
+                .ForMember(dest => dest.ID, op => op.Ignore());
 
             CreateMap<RTMatchStatsModel, MatchStatisticsModel>()
                 .ForMember(dest => dest.Value, op => op.MapFrom(src => src.Value))

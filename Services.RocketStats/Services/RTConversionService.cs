@@ -18,31 +18,37 @@ namespace Services.RocketStats.Services
             this.matchStatisticService = matchStatisticService;
         }
 
-        public async Task ProcessMatchAsync(Guid userID, RTMatchModel rtMatchModel)
+        public async Task<RTMatchProcessedModel> ProcessMatchAsync(Guid userID, RTMatchModel rtMatchModel)
         {
             var match = mapper.Map<MatchModel>(rtMatchModel);
-            await matchService.AddAsync(match);
+            var matchReponse = await matchService.AddAsync(match);
             
             var saves = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Saves);
             saves.UserID = userID;
-            saves.MatchID = match.ID;
+            saves.MatchID = matchReponse.ID;
 
             var assists = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Assists);
             assists.UserID = userID;
-            assists.MatchID = match.ID;
+            assists.MatchID = matchReponse.ID;
 
             var goals = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Goals);
             goals.UserID = userID;
-            goals.MatchID = match.ID;
+            goals.MatchID = matchReponse.ID;
 
             var shots = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Shots);
             shots.UserID = userID;
-            shots.MatchID = match.ID;
+            shots.MatchID = matchReponse.ID;
 
-            await matchStatisticService.AddAsync(saves);
-            await matchStatisticService.AddAsync(assists);
-            await matchStatisticService.AddAsync(goals);
-            await matchStatisticService.AddAsync(shots);
+            var rtResponseModel = new RTMatchProcessedModel() {
+                MatchInfo = matchReponse,
+            };
+
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(saves));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(assists));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(goals));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(shots));
+
+            return rtResponseModel;
         }
     }
 }

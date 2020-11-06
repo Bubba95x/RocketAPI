@@ -6,6 +6,6 @@ namespace Services.RocketStats.Services
 {
     public interface IRTConversionService
     {
-        Task ProcessMatchAsync(Guid userId, RTMatchModel matchModel);
+        Task<RTMatchProcessedModel> ProcessMatchAsync(Guid userID, RTMatchModel rtMatchModel);
     }
 }

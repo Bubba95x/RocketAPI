@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.RocketStats.Dtos
 {
-    public class RTMatchDto
+    public class RTMatchRequestDto
     {
         public Guid ID { get; set; }
         public RTMetaDataDto Metadata { get; set; }

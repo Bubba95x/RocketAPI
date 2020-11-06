@@ -3,8 +3,6 @@ using Data.RocketStats.Entities;
 using Data.RocketStats.Repos;
 using Services.RocketStats.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Services.RocketStats.Services
@@ -24,6 +22,12 @@ namespace Services.RocketStats.Services
         {
             var entity = mapper.Map<UserEntity>(model);
             var response = await repository.AddAsync(entity);
+            return mapper.Map<UserModel>(response);
+        }
+
+        public async Task<UserModel> GetAsync(Guid ID)
+        {
+            var response = await repository.GetAsync(ID);
             return mapper.Map<UserModel>(response);
         }
     }
