@@ -1,4 +1,7 @@
 ﻿using Data.RocketStats.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Data.RocketStats.Repos
@@ -17,6 +20,11 @@ namespace Data.RocketStats.Repos
             var response = await dbContext.User.AddAsync(entity);
             await dbContext.SaveChangesAsync();
             return response.Entity;
+        }
+
+        public async Task<UserEntity> GetAsync(Guid ID)
+        {
+            return await dbContext.User.FirstAsync(x => x.ID == ID);
         }
     }
 }

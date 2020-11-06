@@ -18,7 +18,7 @@ namespace Services.RocketStats.Services
             this.matchStatisticService = matchStatisticService;
         }
 
-        public async Task ProcessMatchAsync(Guid userID, RTMatchModel rtMatchModel)
+        public async Task<RTMatchProcessedModel> ProcessMatchAsync(Guid userID, RTMatchModel rtMatchModel)
         {
             var match = mapper.Map<MatchModel>(rtMatchModel);
             var matchReponse = await matchService.AddAsync(match);
@@ -39,10 +39,16 @@ namespace Services.RocketStats.Services
             shots.UserID = userID;
             shots.MatchID = matchReponse.ID;
 
-            await matchStatisticService.AddAsync(saves);
-            await matchStatisticService.AddAsync(assists);
-            await matchStatisticService.AddAsync(goals);
-            await matchStatisticService.AddAsync(shots);
+            var rtResponseModel = new RTMatchProcessedModel() {
+                MatchInfo = matchReponse,
+            };
+
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(saves));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(assists));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(goals));
+            rtResponseModel.MatchStatistics.Add(await matchStatisticService.AddAsync(shots));
+
+            return rtResponseModel;
         }
     }
 }

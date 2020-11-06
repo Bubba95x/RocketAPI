@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.RocketStats.Models;
 using Services.RocketStats.Services;
+using System;
 using System.Threading.Tasks;
 
 namespace API.RocketStats.Controllers
@@ -27,6 +28,13 @@ namespace API.RocketStats.Controllers
         {
             var model = mapper.Map<UserModel>(userDto);
             var response = await userService.AddAsync(model);
+            return mapper.Map<UserResponseDto>(response);
+        }
+
+        [HttpGet("{ID}")]
+        public async Task<UserResponseDto> GetAsync([FromRoute] Guid ID)
+        {
+            var response = await userService.GetAsync(ID);
             return mapper.Map<UserResponseDto>(response);
         }
     }

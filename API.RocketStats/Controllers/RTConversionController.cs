@@ -25,10 +25,11 @@ namespace API.RocketStats.Controllers
 
         [HttpPost]
         [Route("match/user/{userID}")]
-        public async Task ProcessMatchAsync([FromBody] RTMatchDto matchDto, [FromRoute]Guid userID)
+        public async Task<RTMatchProcessedResponseDto> ProcessMatchAsync([FromBody] RTMatchRequestDto matchDto, [FromRoute]Guid userID)
         {
             var matchModel = mapper.Map<RTMatchModel>(matchDto);
-            await conversionService.ProcessMatchAsync(userID, matchModel);
+            var response = await conversionService.ProcessMatchAsync(userID, matchModel);
+            return mapper.Map<RTMatchProcessedResponseDto>(response);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace API.RocketStats.AutoMapper
         public ProfileSetup()
         {
             // Dto to Model
-            CreateMap<RTMatchDto, RTMatchModel>();
+            CreateMap<RTMatchRequestDto, RTMatchModel>();
             CreateMap<RTMetaDataDto, RTMetaDataModel>();
             CreateMap<RTMatchStatsDto, RTMatchStatsModel>();
             CreateMap<RTMetaDataDto, RTMetaDataModel>();
@@ -30,10 +30,13 @@ namespace API.RocketStats.AutoMapper
             // Entity to Model
             CreateMap<MatchEntity, MatchModel>();
             CreateMap<UserEntity, UserModel>();
+            CreateMap<MatchStatisticsEntity, MatchStatisticsModel>();
 
             // Model to Dto
             CreateMap<UserModel, UserResponseDto>();
             CreateMap<MatchModel, MatchResponseDto>();
+            CreateMap<MatchStatisticsModel, MatchStatisticsResponseDto>();
+            CreateMap<RTMatchProcessedModel, RTMatchProcessedResponseDto>();
 
             // -------------------
             // Model to Model

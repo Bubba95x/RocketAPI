@@ -20,10 +20,11 @@ namespace Services.RocketStats.Services
             this.matchStatisticRepository = matchStatisticRepository;
         }
 
-        public async Task AddAsync(MatchStatisticsModel model)
+        public async Task<MatchStatisticsModel> AddAsync(MatchStatisticsModel model)
         {
             var entity = mapper.Map<MatchStatisticsEntity>(model);
-            await matchStatisticRepository.AddAsync(entity);
+            var response = await matchStatisticRepository.AddAsync(entity);
+            return mapper.Map<MatchStatisticsModel>(response);
         }
     }
 }
