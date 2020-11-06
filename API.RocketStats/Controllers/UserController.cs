@@ -23,11 +23,11 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
-        public async Task<UserDto> AddAsync(UserDto userDto)
+        public async Task<UserResponseDto> AddAsync([FromBody] UserRequestDto userDto)
         {
             var model = mapper.Map<UserModel>(userDto);
             var response = await userService.AddAsync(model);
-            return mapper.Map<UserDto>(response);
+            return mapper.Map<UserResponseDto>(response);
         }
     }
 }
