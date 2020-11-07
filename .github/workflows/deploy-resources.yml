@@ -25,4 +25,4 @@ jobs:
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
-        template: RocketAPI/.github/workflows/app-service-template.json
+        template: .github/workflows/app-service-template.json
