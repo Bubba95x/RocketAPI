@@ -11,16 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      # Checkout code
     - uses: actions/checkout@master
 
-      # Log into Azure
     - uses: azure/actions/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      # Deploy ARM template
-    - name: Run ARM deploy
+    - name: Azure CLI - Create Data Resources
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          az account show
+          az sql server create -l westus2 -u rbanick -p ${{ secrets.SQL_CREDENTIALS }} -n banick-rocket-server -g ${{ secrets.AZURE_RG }}
+
+    - name: ARM Deploy - Create App Service Resoures
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
