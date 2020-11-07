@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.RocketStats", "API.RocketStats\API.RocketStats.csproj", "{D768A525-D355-416D-8AA4-AD68FFE247D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.RocketStats", "API.RocketStats\API.RocketStats.csproj", "{D768A525-D355-416D-8AA4-AD68FFE247D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.RocketStats", "Services.RocketStats\Services.RocketStats.csproj", "{11C8A153-FC3D-4BD7-8A94-46E515CB15F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.RocketStats", "Services.RocketStats\Services.RocketStats.csproj", "{11C8A153-FC3D-4BD7-8A94-46E515CB15F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.RocketStats", "Data.RocketStats\Data.RocketStats.csproj", "{52F23188-543D-4E38-BD46-73F95367FFC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.RocketStats", "Data.RocketStats\Data.RocketStats.csproj", "{52F23188-543D-4E38-BD46-73F95367FFC9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{70402917-D1F6-42F7-8C0B-DC3D943FD853}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\ExportedTemplate-banick-rocket-api-rg\app-service-template.json = ..\..\..\Downloads\ExportedTemplate-banick-rocket-api-rg\app-service-template.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
