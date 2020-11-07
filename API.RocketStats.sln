@@ -9,11 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.RocketStats", "Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.RocketStats", "Data.RocketStats\Data.RocketStats.csproj", "{52F23188-543D-4E38-BD46-73F95367FFC9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{70402917-D1F6-42F7-8C0B-DC3D943FD853}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\Downloads\ExportedTemplate-banick-rocket-api-rg\app-service-template.json = ..\..\..\Downloads\ExportedTemplate-banick-rocket-api-rg\app-service-template.json
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
