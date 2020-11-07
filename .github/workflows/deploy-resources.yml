@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy-resources:
     runs-on: ubuntu-latest
     steps:
 
@@ -23,7 +23,8 @@ jobs:
         azcliversion: 2.0.72
         inlineScript: |
           az account show
-          az sql server create -l westus2 -u rbanick -p ${{ secrets.SQL_CREDENTIALS }} -n banick-rocket-server -g ${{ secrets.AZURE_RG }}
+          az sql server create -l westus2 -u rbanick -p ${{ secrets.SQL_CREDENTIALS }} -n ${{ secrets.SQL_SERVER_NAME }} -g ${{ secrets.AZURE_RG }}
+          az sql db create -g ${{ secrets.AZURE_RG }} -s ${{ secrets.SQL_SERVER_NAME }} -n ${{ secrets.SQL_DB_NAME }} -e Standard
 
     - name: ARM Deploy - Create App Service Resoures
       uses: azure/arm-deploy@v1
