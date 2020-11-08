@@ -1,22 +1,40 @@
-name: Deploy Resources
+name: Build, Test, Deploy
 
-on:
+on:  
   push:
-    branches: [ main ]
+    branches: main
   pull_request:
-    branches: [ main ]
+    branches: main
 
 jobs:
   deploy-resources:
     runs-on: ubuntu-latest
     steps:
-
+    - uses: actions/checkout@v2
     - uses: actions/checkout@master
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.301
+  # Restore, Build, ad Test Code Set
+    - name: Install dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    
+    - name: Publish
+      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/rocketapi'
 
     - uses: azure/actions/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+  # Create data resources using Azure Cli
     - name: Azure CLI - Create Data Resources
       uses: azure/CLI@v1
       with:
@@ -26,26 +44,17 @@ jobs:
           az sql server create -l westus2 -u rbanick -p ${{ secrets.SQL_CREDENTIALS }} -n ${{ secrets.SQL_SERVER_NAME }} -g ${{ secrets.AZURE_RG }}
           az sql db create -g ${{ secrets.AZURE_RG }} -s ${{ secrets.SQL_SERVER_NAME }} -n ${{ secrets.SQL_DB_NAME }} -e Standard
 
+  # Create the App Service w/ARM Template
     - name: ARM Deploy - Create App Service Resoures
       uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: .github/workflows/app-service-template.json
-        
-  build-test-deploy:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 3.1.301
-    - name: Install dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
+  
+  # Deploy code to app service
+    - name: Deploy App Service
+      uses: azure/webapps-deploy@v2
+      with: 
+            app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
+            package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/rocketapi'
