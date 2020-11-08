@@ -28,7 +28,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     
     - name: Publish
-      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/rocketapi'
+      run: dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
 
     - uses: azure/actions/login@v1
       with:
@@ -57,4 +57,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       with: 
             app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-            package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/rocketapi'
+            package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
