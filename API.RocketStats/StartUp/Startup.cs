@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Services.RocketStats.Services;
 
-namespace API.RocketStats
+namespace API.RocketStats.StartUp
 {
     public class Startup
     {
@@ -74,7 +74,7 @@ namespace API.RocketStats
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RocketAPI API V1");
             });
 
             app.UseEndpoints(endpoints =>
