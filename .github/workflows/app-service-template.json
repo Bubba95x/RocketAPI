@@ -27,7 +27,7 @@
         {
             "type": "microsoft.insights/components",
             "apiVersion": "2018-05-01-preview",
-            "name": "[concat(parameters('BaseName'), '-api')]",
+            "name": "[concat(parameters('BaseName'), '-api-insights')]",
             "location": "westus2",
             "kind": "web",
             "properties": {
