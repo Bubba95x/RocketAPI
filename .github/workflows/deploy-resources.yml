@@ -55,3 +55,14 @@ jobs:
       with: 
             app-name: ${{ secrets.APPSERVICE_NAME }}
             package: 'artifacts/rocketapi'
+
+  # Post Deployment Configuration
+    - name: Post Deploy Configuration
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.0.72
+        inlineScript: |
+          id=$(az webapp identity assign -n ${{ secrets.APPSERVICE_NAME }} -g ${{ secrets.AZURE_RG }})
+          az keyvault set-policy -n ${{ secrets.VAULT_NAME }} --secret-permissions get list --object-id $id
+          acId=$(az appconfig show --name ${{ secrets.APP_CONFIGURATION_NAME }} | jq -r '.id')
+          az role assignment create --assignee-object-id $id --role "App Configuration Data Reader" --scope $acId
