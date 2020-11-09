@@ -37,7 +37,6 @@ jobs:
       with:
         azcliversion: 2.0.72
         inlineScript: |
-          az account show
           az sql server create -l westus2 -u rbanick -p ${{ secrets.SQL_CREDENTIALS }} -n ${{ secrets.SQL_SERVER_NAME }} -g ${{ secrets.AZURE_RG }}
           az sql db create -g ${{ secrets.AZURE_RG }} -s ${{ secrets.SQL_SERVER_NAME }} -n ${{ secrets.SQL_DB_NAME }} -e Standard
 
@@ -48,6 +47,7 @@ jobs:
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ secrets.AZURE_RG }}
         template: .github/workflows/app-service-template.json
+        parameters: BaseName=${{ secrets.APP_BASENAME }}, AppConfig:Endpoint=${{ secrets.APPCONFIG_ENDPOINT }}
   
   # Deploy code to app service
     - name: Deploy App Service
@@ -62,7 +62,6 @@ jobs:
       with:        
         azcliversion: 2.0.72
         inlineScript: |
-          az account set -s ${{ secrets.AZURE_SUBSCRIPTION }}
           id=$(az webapp identity assign -n ${{ secrets.APPSERVICE_NAME }} -g ${{ secrets.AZURE_RG }} | jq -r '.principalId')
           az keyvault set-policy -n ${{ secrets.VAULT_NAME }} --secret-permissions get list --object-id $id
           acId=$(az appconfig show --name ${{ secrets.APP_CONFIGURATION_NAME }} | jq -r '.id')
