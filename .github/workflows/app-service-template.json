@@ -1,5 +1,5 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "BaseName": {
@@ -65,10 +65,10 @@
         {
             "type": "Microsoft.Web/sites",
             "apiVersion": "2018-11-01",
-            "name": "rocket-api",
+            "name": "[concat(parameters('BaseName'), '-api')]",
             "location": "West US 2",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', 'rocket-asp')]"
+                "[resourceId('Microsoft.Web/serverfarms', concat(parameters('BaseName'), '-asp'))]"
             ],
             "kind": "app",
             "properties": {
@@ -80,12 +80,12 @@
                         "hostType": "Standard"
                     },
                     {
-                        "name": "rocket-api.scm.azurewebsites.net",
+                        "name": "[concat(parameters('BaseName'), '-api.scm.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Repository"
                     }
                 ],
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'rocket-asp')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', concat(parameters('BaseName'), '-asp'))]",
                 "reserved": false,
                 "isXenon": false,
                 "hyperV": false,
@@ -103,10 +103,10 @@
         {
             "type": "Microsoft.Web/sites/config",
             "apiVersion": "2018-11-01",
-            "name": "rocket-api/web",
+            "name": "[concat(parameters('BaseName'), '-api/web')]",
             "location": "West US 2",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'rocket-api')]"
+                "[resourceId('Microsoft.Web/sites', concat(parameters('BaseName'), '-api'))]"
             ],
             "properties": {
                 "numberOfWorkers": 1,
@@ -127,7 +127,7 @@
                 "httpLoggingEnabled": false,
                 "logsDirectorySizeLimit": 35,
                 "detailedErrorLoggingEnabled": false,
-                "publishingUsername": "$rocket-api",
+                "publishingUsername": "[concat('$', parameters('BaseName'), '-api')]",
                 "azureStorageAccounts": {},
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
@@ -185,13 +185,13 @@
         {
             "type": "Microsoft.Web/sites/hostNameBindings",
             "apiVersion": "2018-11-01",
-            "name": "rocket-api/rocket-api.azurewebsites.net",
+            "name": "[concat(parameters('BaseName'), '-api/', parameters('BaseName'), '-api.azurewebsites.net')]",
             "location": "West US 2",
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', concat(parameters('BaseName'),'-api'))]"
             ],
             "properties": {
-                "siteName": "rocket-api",
+                "siteName": "[concat(parameters('BaseName'), '-api')]",
                 "hostNameType": "Verified"
             }
         }
