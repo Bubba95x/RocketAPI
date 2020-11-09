@@ -1,18 +1,38 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {},
+    "parameters": {
+        "BaseName": {
+            "type": "string",
+            "metadata": {
+                "description": "Base name used for naming the app service components"
+            }
+        },
+        "AzureAppConfig:Endpoint": {
+            "type": "string",
+            "metadata": {
+                "description": "Url of the App Config the App Service should target"
+            }
+        },
+        "EnvironmentName":{
+            "type": "string",
+            "defaultValue": "production",
+            "metadata": {
+                "description": "Environment name used by the app config to pull the correct values"
+            }
+        }
+    },
     "variables": {},
     "resources": [
         {
             "type": "microsoft.insights/components",
             "apiVersion": "2018-05-01-preview",
-            "name": "rocket-api",
+            "name": "[concat(parameters('BaseName'), '-api')]",
             "location": "westus2",
             "kind": "web",
             "properties": {
                 "Application_Type": "web",
-                "Request_Source": "IbizaWebAppExtensionCreate",
+                "Request_Source": "rest",
                 "RetentionInDays": 90,
                 "publicNetworkAccessForIngestion": "Enabled",
                 "publicNetworkAccessForQuery": "Enabled"
@@ -21,7 +41,7 @@
         {
             "type": "Microsoft.Web/serverfarms",
             "apiVersion": "2018-02-01",
-            "name": "rocket-asp",
+            "name": "[concat(parameters('BaseName'), '-asp')]",
             "location": "West US 2",
             "sku": {
                 "name": "B1",
@@ -55,7 +75,7 @@
                 "enabled": true,
                 "hostNameSslStates": [
                     {
-                        "name": "rocket-api.azurewebsites.net",
+                        "name": "[concat(parameters('BaseName'), '-api.azurewebsites.net')]",
                         "sslState": "Disabled",
                         "hostType": "Standard"
                     },
@@ -112,7 +132,7 @@
                 "scmType": "None",
                 "use32BitWorkerProcess": true,
                 "webSocketsEnabled": false,
-                "alwaysOn": false,
+                "alwaysOn": true,
                 "managedPipelineMode": "Integrated",
                 "virtualApplications": [
                     {
@@ -149,7 +169,17 @@
                 "http20Enabled": false,
                 "minTlsVersion": "1.2",
                 "ftpsState": "AllAllowed",
-                "reservedInstanceCount": 0
+                "reservedInstanceCount": 0,
+                "appSettings": [
+                        {
+                            "name": "AppConfig:Endpoint",
+                            "value" : "[parameters('AzureAppConfig:Endpoint')]"
+                        },
+                        {
+                            "name": "Environment",
+                            "value": "[parameters('EnvironmentName')]"
+                        }
+                    ]
             }
         },
         {
@@ -158,7 +188,7 @@
             "name": "rocket-api/rocket-api.azurewebsites.net",
             "location": "West US 2",
             "dependsOn": [
-                "[resourceId('Microsoft.Web/sites', 'rocket-api')]"
+                "[resourceId('Microsoft.Web/sites', concat(parameters('BaseName'),'-api'))]"
             ],
             "properties": {
                 "siteName": "rocket-api",
