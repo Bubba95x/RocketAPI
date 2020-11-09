@@ -64,6 +64,6 @@ jobs:
         inlineScript: |
           az account show
           id=$(az webapp identity assign -n ${{ secrets.APPSERVICE_NAME }} -g ${{ secrets.AZURE_RG }} | jq -r '.principalId')
-          az keyvault set-policy --subscription ${{ secrets.AZURE_SUBSCRIPTION }} -n ${{ secrets.VAULT_NAME }} --secret-permissions get list --object-id $id
+          az keyvault set-policy -s ${{ secrets.AZURE_SUBSCRIPTION }} -n ${{ secrets.VAULT_NAME }} --secret-permissions get list --object-id $id
           acId=$(az appconfig show --name ${{ secrets.APP_CONFIGURATION_NAME }} | jq -r '.id')
           az role assignment create --assignee-object-id $id --role "App Configuration Data Reader" --scope $acId
