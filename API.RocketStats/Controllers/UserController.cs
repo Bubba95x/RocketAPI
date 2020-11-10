@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Services.RocketStats.Models;
 using Services.RocketStats.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace API.RocketStats.Controllers
@@ -37,5 +38,13 @@ namespace API.RocketStats.Controllers
             var response = await userService.GetAsync(ID);
             return mapper.Map<UserResponseDto>(response);
         }
+
+        [HttpGet("list")]
+        public async Task<List<UserResponseDto>> GetAllAsync()
+        {
+            var response = await userService.GetAllAsync();
+            return mapper.Map<List<UserResponseDto>>(response);
+        }
+
     }
 }

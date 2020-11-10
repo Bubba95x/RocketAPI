@@ -8,7 +8,7 @@ namespace Data.RocketStats
     {
         public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
         {
-            string connStr = ConfigurationExtensions.GetConnectionString(configuration, "RocketStats");
+            string connStr = configuration["ConnectionStrings:RocketStats"];
             services.AddDbContext<RocketStatsDbContext>(options =>
                     options.UseSqlServer(connStr));
         }

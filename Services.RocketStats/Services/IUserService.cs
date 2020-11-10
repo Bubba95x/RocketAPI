@@ -1,5 +1,6 @@
 ﻿using Services.RocketStats.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Services.RocketStats.Services
@@ -8,5 +9,6 @@ namespace Services.RocketStats.Services
     {
         Task<UserModel> AddAsync(UserModel model);
         Task<UserModel> GetAsync(Guid ID);
+        Task<IEnumerable<UserModel>> GetAllAsync();
     }
 }
