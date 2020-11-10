@@ -1,7 +1,7 @@
 ﻿using Data.RocketStats.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Data.RocketStats.Repos
@@ -25,6 +25,11 @@ namespace Data.RocketStats.Repos
         public async Task<UserEntity> GetAsync(Guid ID)
         {
             return await dbContext.User.FirstAsync(x => x.ID == ID);
+        }
+
+        public async Task<IEnumerable<UserEntity>> GetAllAsync()
+        {
+            return await dbContext.User.ToListAsync();
         }
     }
 }
