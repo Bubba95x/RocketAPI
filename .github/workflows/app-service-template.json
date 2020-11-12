@@ -133,7 +133,7 @@
                     "index.php",
                     "hostingstart.html"
                 ],
-                "netFrameworkVersion": "v4.0",
+                "netFrameworkVersion": "v5.0",
                 "requestTracingEnabled": false,
                 "remoteDebuggingEnabled": false,
                 "httpLoggingEnabled": false,
