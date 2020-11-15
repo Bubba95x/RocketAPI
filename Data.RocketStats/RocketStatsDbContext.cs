@@ -9,7 +9,7 @@ namespace Data.RocketStats
     {
         public RocketStatsDbContext(DbContextOptions<RocketStatsDbContext> options, IConfiguration configuration) : base(options)
         {
-            if(configuration["Environment"] != "rocketapi:local")
+            if(configuration["Environment"] != "local")
             {
                 var conn = (Microsoft.Data.SqlClient.SqlConnection)Database.GetDbConnection();
                 conn.AccessToken = (new AzureServiceTokenProvider()).GetAccessTokenAsync("https://database.windows.net/").Result;

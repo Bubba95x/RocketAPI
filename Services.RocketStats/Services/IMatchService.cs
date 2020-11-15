@@ -8,5 +8,6 @@ namespace Services.RocketStats.Services
     {
         Task<MatchModel> AddAsync(MatchModel matchModel);
         Task<MatchModel> GetAsync(Guid ID);
+        Task<MatchModel> GetByRocketStatsIDAsync(Guid ID);
     }
 }

@@ -23,6 +23,7 @@ namespace API.RocketStats
                     var settings = config.Build();
                     config.AddAzureAppConfiguration(options =>
                     options.Connect(new Uri(settings["AppConfig:Endpoint"]), creds)
+                    .ConfigureKeyVault(x => x.SetCredential(creds))
                     .Select(KeyFilter.Any, settings["Environment"])
                     );
                 }).UseStartup<Startup>());
