@@ -14,16 +14,21 @@ namespace Data.RocketStats.Repos
             this.dbContext = dbContext;
         }
 
-        public async Task<MatchEntity> AddAsync(MatchEntity matchModel)
+        public async Task<MatchEntity> AddAsync(MatchEntity entity)
         {
-            var entity = await dbContext.Match.AddAsync(matchModel);
+            var response = await dbContext.Match.AddAsync(entity);
             await dbContext.SaveChangesAsync();
-            return entity.Entity;
+            return response.Entity;
         }
 
         public async Task<MatchEntity> GetAsync(Guid ID)
         {
-            return await dbContext.Match.FirstAsync(x => x.ID == ID);
+            return await dbContext.Match.FirstOrDefaultAsync(x => x.ID == ID);
+        }
+
+        public async Task<MatchEntity> GetByRocketStatsIDAsync(Guid ID)
+        {
+            return await dbContext.Match.FirstOrDefaultAsync(x => x.RocketStatsID == ID);
         }
     }
 }

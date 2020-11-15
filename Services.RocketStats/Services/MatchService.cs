@@ -30,5 +30,11 @@ namespace Services.RocketStats.Services
             var response = await matchRepository.GetAsync(ID);
             return mapper.Map<MatchModel>(response);
         }
+
+        public async Task<MatchModel> GetByRocketStatsIDAsync(Guid ID)
+        {
+            var response = await matchRepository.GetByRocketStatsIDAsync(ID);
+            return mapper.Map<MatchModel>(response);
+        }
     }
 }

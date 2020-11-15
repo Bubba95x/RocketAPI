@@ -7,6 +7,5 @@ namespace API.RocketStats.Dtos
         public Guid ID { get; set; }
         public RTMetaDataDto Metadata { get; set; }
         public RTStatsDto Stats { get; set; }
-
     }
 }

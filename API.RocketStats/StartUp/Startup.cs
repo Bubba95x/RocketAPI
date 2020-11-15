@@ -35,11 +35,13 @@ namespace API.RocketStats.StartUp
             services.AddScoped<IRTConversionService, RTConversionService>();
             services.AddScoped<IMatchStatisticService, MatchStatisticService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserMatchService, UserMatchService>();
 
             // Repos
             services.AddScoped<IMatchRepository, MatchRepository>();
             services.AddScoped<IMatchStatisticRepository, MatchStatisticRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserMatchRepository, UserMatchRepository>();
 
             // 1. Add Authentication Services
             services.AddAuthentication(options =>

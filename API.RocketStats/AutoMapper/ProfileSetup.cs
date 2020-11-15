@@ -20,23 +20,17 @@ namespace API.RocketStats.AutoMapper
             CreateMap<MatchRequestDto, MatchModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
 
-            // Model to Entity
-            CreateMap<MatchStatisticsModel, MatchStatisticsEntity>();
-            CreateMap<MatchModel, MatchEntity>();
-            CreateMap<UserModel, UserEntity>()
-                .ForMember(dest => dest.ID, op => op.Ignore());
-
-            // -------------------
-            // Entity to Model
-            CreateMap<MatchEntity, MatchModel>();
-            CreateMap<UserEntity, UserModel>();
-            CreateMap<MatchStatisticsEntity, MatchStatisticsModel>();
-
             // Model to Dto
             CreateMap<UserModel, UserResponseDto>();
             CreateMap<MatchModel, MatchResponseDto>();
             CreateMap<MatchStatisticsModel, MatchStatisticsResponseDto>();
             CreateMap<RTMatchProcessedModel, RTMatchProcessedResponseDto>();
+
+            // Model - Entity
+            CreateMap<MatchStatisticsModel, MatchStatisticsEntity>().ReverseMap();
+            CreateMap<MatchModel, MatchEntity>().ReverseMap();
+            CreateMap<UserModel, UserEntity>().ReverseMap();
+            CreateMap<UserMatchEntity, UserMatchModel>().ReverseMap();
 
             // -------------------
             // Model to Model

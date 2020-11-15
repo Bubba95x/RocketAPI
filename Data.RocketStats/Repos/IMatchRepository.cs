@@ -6,7 +6,8 @@ namespace Data.RocketStats.Repos
 {
     public interface IMatchRepository
     {
-        Task<MatchEntity> AddAsync(MatchEntity matchModel);
+        Task<MatchEntity> AddAsync(MatchEntity entity);
         Task<MatchEntity> GetAsync(Guid ID);
+        Task<MatchEntity> GetByRocketStatsIDAsync(Guid ID);
     }
 }
