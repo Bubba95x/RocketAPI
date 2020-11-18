@@ -24,8 +24,7 @@ namespace API.RocketStats
                     config.AddAzureAppConfiguration(options =>
                     options.Connect(new Uri(settings["AppConfig:Endpoint"]), creds)
                     .ConfigureKeyVault(x => x.SetCredential(creds))
-                    .Select(KeyFilter.Any, settings["Environment"])
-                    );
+                    .Select(KeyFilter.Any, settings["Environment"]));
                 }).UseStartup<Startup>());
     }
 }

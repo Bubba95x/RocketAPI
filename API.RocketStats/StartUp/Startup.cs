@@ -53,6 +53,7 @@ namespace API.RocketStats.StartUp
                 options.Authority = Configuration["Auth0:Domain"];
                 options.Audience = Configuration["Auth0:Audience"];
             });
+
             services.AddControllers();
             services.RegisterSecurityScopes(Configuration);
             
@@ -65,9 +66,7 @@ namespace API.RocketStats.StartUp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            app.UseStaticFiles();
-            app.UseDefaultFiles();
+            }            
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
@@ -83,6 +82,8 @@ namespace API.RocketStats.StartUp
             {
                 endpoints.MapControllers();
             });
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Data.RocketStats.Repos
 
         public async Task<UserMatchEntity> GetByUserIdAndMatchIdAsync(Guid userId, Guid matchId)
         {
-            return await dbContext.UserMatch.FirstAsync(x => x.UserID == userId && x.MatchID == matchId);
+            return await dbContext.UserMatch.FirstOrDefaultAsync(x => x.UserID == userId && x.MatchID == matchId);
         }
     }
 }

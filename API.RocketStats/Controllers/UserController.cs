@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace API.RocketStats.Controllers
 {
     [Route("api/user")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class UserController
     {

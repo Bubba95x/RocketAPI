@@ -5,6 +5,6 @@ namespace Services.RocketStats.Services
 {
     public interface IMatchStatisticService
     {
-        Task<MatchStatisticsModel> AddAsync(MatchStatisticsModel model);
+        Task<MatchStatisticModel> AddAsync(MatchStatisticModel model);
     }
 }
