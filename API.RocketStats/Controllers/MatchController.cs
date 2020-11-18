@@ -2,16 +2,15 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Services.RocketStats.Models;
 using Services.RocketStats.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.RocketStats.Controllers
 {
     [Route("api/match")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class MatchController
     {
@@ -24,11 +23,26 @@ namespace API.RocketStats.Controllers
             this.matchService = matchService;
         }
 
-        [HttpGet("")]
-        public async Task<MatchRequestDto> GetAsync(Guid ID)
+        [HttpGet("{ID}")]
+        public async Task<MatchResponseDto> GetAsync([FromRoute] Guid ID)
         {
             var response = await matchService.GetAsync(ID);
-            return mapper.Map<MatchRequestDto>(response);
+            return mapper.Map<MatchResponseDto>(response);
+        }
+
+        [HttpGet("rocketstatsid/{ID}")]
+        public async Task<MatchResponseDto> GetByRocketStatsIDAsync([FromRoute] Guid ID)
+        {
+            var response = await matchService.GetByRocketStatsIDAsync(ID);
+            return mapper.Map<MatchResponseDto>(response);
+        }
+
+        [HttpPost("")]
+        public async Task<MatchResponseDto> AddAsync([FromBody] MatchRequestDto matchDto)
+        {
+            var model = mapper.Map<MatchModel>(matchDto);
+            var response = await matchService.AddAsync(model);
+            return mapper.Map<MatchResponseDto>(response);
         }
     }
 }

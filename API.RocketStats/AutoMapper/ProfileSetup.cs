@@ -10,42 +10,26 @@ namespace API.RocketStats.AutoMapper
         public ProfileSetup()
         {
             // Dto to Model
-            CreateMap<RTMatchRequestDto, RTMatchModel>();
-            CreateMap<RTMetaDataDto, RTMetaDataModel>();
-            CreateMap<RTMatchStatsDto, RTMatchStatsModel>();
-            CreateMap<RTMetaDataDto, RTMetaDataModel>();
-            CreateMap<RTStatsDto, RTStatsModel>();
-            CreateMap<UserRequestDto, UserModel>()
-                .ForMember(dest => dest.ID, op => op.Ignore());
             CreateMap<MatchRequestDto, MatchModel>()
+                .ForMember(dest => dest.ID, op => op.Ignore());
+            CreateMap<MatchStatisticRequestDto, MatchStatisticModel>()
+                .ForMember(dest => dest.ID, op => op.Ignore());
+            CreateMap<UserMatchRequestDto, UserMatchModel>()
+                .ForMember(dest => dest.ID, op => op.Ignore());
+            CreateMap<UserRequestDto, UserModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
 
             // Model to Dto
-            CreateMap<UserModel, UserResponseDto>();
             CreateMap<MatchModel, MatchResponseDto>();
-            CreateMap<MatchStatisticsModel, MatchStatisticsResponseDto>();
-            CreateMap<RTMatchProcessedModel, RTMatchProcessedResponseDto>();
+            CreateMap<MatchStatisticModel, MatchStatisticResponseDto>();
+            CreateMap<UserMatchModel, UserMatchResponseDto>();
+            CreateMap<UserModel, UserResponseDto>();
 
-            // Model - Entity
-            CreateMap<MatchStatisticsModel, MatchStatisticsEntity>().ReverseMap();
+            // Model - Entity            
             CreateMap<MatchModel, MatchEntity>().ReverseMap();
-            CreateMap<UserModel, UserEntity>().ReverseMap();
+            CreateMap<MatchStatisticModel, MatchStatisticsEntity>().ReverseMap();
             CreateMap<UserMatchEntity, UserMatchModel>().ReverseMap();
-
-            // -------------------
-            // Model to Model
-            CreateMap<RTMatchModel, MatchModel>()
-                .ForMember(dest => dest.RocketStatsID, op => op.MapFrom(src => src.ID))
-                .ForMember(dest => dest.MatchDate, op => op.MapFrom(src => src.Metadata.DateCollected))
-                .ForMember(dest => dest.GameMode, op => op.MapFrom(src => src.Metadata.Playlist))
-                .ForMember(dest => dest.ID, op => op.Ignore());
-
-            CreateMap<RTMatchStatsModel, MatchStatisticsModel>()
-                .ForMember(dest => dest.Value, op => op.MapFrom(src => src.Value))
-                .ForMember(dest => dest.StatType, op => op.MapFrom(src => src.DisplayName))
-                .ForMember(dest => dest.MatchID, op => op.Ignore())
-                .ForMember(dest => dest.UserID, op => op.Ignore())
-                .ForMember(dest => dest.ID, op => op.Ignore());
+            CreateMap<UserModel, UserEntity>().ReverseMap();
         }
     }
 }

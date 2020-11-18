@@ -53,19 +53,19 @@ namespace Services.RocketStats.Services
             await userMatchService.AddAsync(userMatch);
 
             // Create Stats
-            var saves = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Saves);
+            var saves = mapper.Map<MatchStatisticModel>(rtMatchModel.Stats.Saves);
             saves.UserID = userID;
             saves.MatchID = matchResponse.ID;
 
-            var assists = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Assists);
+            var assists = mapper.Map<MatchStatisticModel>(rtMatchModel.Stats.Assists);
             assists.UserID = userID;
             assists.MatchID = matchResponse.ID;
 
-            var goals = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Goals);
+            var goals = mapper.Map<MatchStatisticModel>(rtMatchModel.Stats.Goals);
             goals.UserID = userID;
             goals.MatchID = matchResponse.ID;
 
-            var shots = mapper.Map<MatchStatisticsModel>(rtMatchModel.Stats.Shots);
+            var shots = mapper.Map<MatchStatisticModel>(rtMatchModel.Stats.Shots);
             shots.UserID = userID;
             shots.MatchID = matchResponse.ID;
 
