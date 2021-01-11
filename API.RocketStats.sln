@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.RocketStats", "Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.RocketStats", "Data.RocketStats\Data.RocketStats.csproj", "{52F23188-543D-4E38-BD46-73F95367FFC9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{03584EB6-339E-4F0F-9F2C-85E36D47C5F9}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\app-service-template.json = .github\workflows\app-service-template.json
+		.github\workflows\deploy-resources.yml = .github\workflows\deploy-resources.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

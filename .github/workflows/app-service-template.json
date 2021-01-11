@@ -91,16 +91,28 @@
                 "hyperV": false,
                 "siteConfig": {
                     "alwaysOn": true,
-                    "appSettings": [
-                        {
-                            "name": "AppConfig:Endpoint",
-                            "value" : "[parameters('AzureAppConfig:Endpoint')]"
-                        },
-                        {
-                            "name": "Environment",
-                            "value": "[parameters('EnvironmentName')]"
-                        }
-                    ]
+                  "appSettings": [
+                    {
+                      "name": "ConnectionStrings:RocketStats",
+                      "value": "Server=tcp:banick-rocket-server.database.windows.net,1433;Initial Catalog=banick-rocket-db;Persist Security Info=False;"
+                    },
+                    {
+                      "name": "Environment",
+                      "value": "[parameters('EnvironmentName')]"
+                    },
+                    {
+                      "name": "keyvaulturl",
+                      "value": "https://banick-vault.vault.azure.net/"
+                    },
+                    {
+                      "name": "OAuth:Audience",
+                      "value": "https://localhost:44303"
+                    },
+                    {
+                      "name": "OAuth:Domain",
+                      "value": "https://banick-tokenservice.azurewebsites.net"
+                    }
+                  ]
                 },
                 "scmSiteAlsoStopped": false,
                 "clientAffinityEnabled": true,

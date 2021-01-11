@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace API.RocketStats.Controllers
 {
     [Route("api/user")]
-    //[Authorize]
     [ApiController]
     public class UserController
     {
@@ -25,6 +24,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
+        [Authorize("RocketAPI.Write")]
         public async Task<UserResponseDto> AddAsync([FromBody] UserRequestDto userDto)
         {
             var model = mapper.Map<UserModel>(userDto);
@@ -33,6 +33,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpGet("{ID}")]
+        [Authorize("RocketAPI.Read")]
         public async Task<UserResponseDto> GetAsync([FromRoute] Guid ID)
         {
             var response = await userService.GetAsync(ID);
@@ -40,6 +41,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpGet("list")]
+        [Authorize("RocketAPI.Read")]
         public async Task<List<UserResponseDto>> GetAllAsync()
         {
             var response = await userService.GetAllAsync();
