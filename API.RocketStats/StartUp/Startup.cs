@@ -1,7 +1,9 @@
 using API.RocketStats.AutoMapper;
+using API.RocketStats.Security;
 using Data.RocketStats;
 using Data.RocketStats.Repos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +28,7 @@ namespace API.RocketStats.StartUp
             
             new AutoMapperConfiguration().ConfigureServices(services);
 
-            services.RegisterLogin(Configuration);
+            //services.RegisterLogin(Configuration);
             services.AddSwaggerGen();
             services.AddMvc();
 
@@ -43,17 +45,15 @@ namespace API.RocketStats.StartUp
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserMatchRepository, UserMatchRepository>();
 
-            // 1. Add Authentication Services
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = Configuration["Auth0:Domain"];
-                options.Audience = Configuration["Auth0:Audience"];
-            });
-
+            // Auth
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication("Bearer", options =>
+                {
+                    options.ApiName = "RocketAPI";
+                    options.Authority = Configuration["OAuth:Domain"];
+                });
+            
+            services.AddSingleton<IAuthorizationHandler, HasScopeHandler>();
             services.AddControllers();
             services.RegisterSecurityScopes(Configuration);
             
@@ -71,7 +71,7 @@ namespace API.RocketStats.StartUp
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            //SwaggerConfiguration.ConfigureSwagger(app, "Rocket API");
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

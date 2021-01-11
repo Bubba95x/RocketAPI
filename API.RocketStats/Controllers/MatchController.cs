@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace API.RocketStats.Controllers
 {
     [Route("api/match")]
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class MatchController
     {

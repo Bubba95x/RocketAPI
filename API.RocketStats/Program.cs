@@ -19,12 +19,8 @@ namespace API.RocketStats
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 webBuilder.ConfigureAppConfiguration(config => {
-                    var creds = new DefaultAzureCredential();
                     var settings = config.Build();
-                    config.AddAzureAppConfiguration(options =>
-                    options.Connect(new Uri(settings["AppConfig:Endpoint"]), creds)
-                    .ConfigureKeyVault(x => x.SetCredential(creds))
-                    .Select(KeyFilter.Any, settings["Environment"]));
+                    config.AddAzureKeyVault(settings["keyvaulturl"]);
                 }).UseStartup<Startup>());
     }
 }
