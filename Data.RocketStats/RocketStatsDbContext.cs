@@ -16,10 +16,10 @@ namespace Data.RocketStats
             }
         }
 
-        public DbSet<MatchEntity> Match { get; set; }
-        public DbSet<MatchStatisticsEntity> MatchStatistics { get; set; }
-        public DbSet<UserEntity> User { get; set; }
-        public DbSet<UserStatisticsEntity> UserStatistics { get; set; }
-        public DbSet<UserMatchEntity> UserMatch { get; set; }
+        public DbSet<MatchEntity> Match { get; set; }        
+        public DbSet<PlayerEntity> Player { get; set; }        
+        public DbSet<PlayerMatchEntity> PlayerMatch { get; set; }
+        public DbSet<PlayerMatchStatisticEntity> PlayerMatchStatistic { get; set; }
+        public DbSet<PlayerStatisticsEntity> PlayerStatistic { get; set; }
     }
 }

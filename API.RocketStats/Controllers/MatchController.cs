@@ -30,14 +30,6 @@ namespace API.RocketStats.Controllers
             return mapper.Map<MatchResponseDto>(response);
         }
 
-        [HttpGet("rocketstatsid/{ID}")]
-        [Authorize("RocketAPI.Read")]
-        public async Task<MatchResponseDto> GetByRocketStatsIDAsync([FromRoute] Guid ID)
-        {
-            var response = await matchService.GetByRocketStatsIDAsync(ID);
-            return mapper.Map<MatchResponseDto>(response);
-        }
-
         [HttpPost("")]
         [Authorize("RocketAPI.Write")]
         public async Task<MatchResponseDto> AddAsync([FromBody] MatchRequestDto matchDto)

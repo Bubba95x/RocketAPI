@@ -34,16 +34,15 @@ namespace API.RocketStats.StartUp
 
             // Services
             services.AddScoped<IMatchService, MatchService>();
-            services.AddScoped<IRTConversionService, RTConversionService>();
-            services.AddScoped<IMatchStatisticService, MatchStatisticService>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserMatchService, UserMatchService>();
+            services.AddScoped<IPlayerMatchStatisticService, PlayerMatchStatisticService>();
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<IPlayerMatchService, PlayerMatchService>();
 
             // Repos
             services.AddScoped<IMatchRepository, MatchRepository>();
-            services.AddScoped<IMatchStatisticRepository, MatchStatisticRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserMatchRepository, UserMatchRepository>();
+            services.AddScoped<IPlayerMatchStatisticsRepository, PlayerMatchStatisticRepository>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
+            services.AddScoped<IPlayerMatchRepository, PlayerMatchRepository>();
 
             // Auth
             services.AddAuthentication("Bearer")
