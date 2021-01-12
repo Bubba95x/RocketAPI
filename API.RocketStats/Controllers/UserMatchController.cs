@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 namespace API.RocketStats.Controllers
 {
     [Route("api/usermatch")]
-    [Authorize]
     [ApiController]
     public class UserMatchController
     {
@@ -24,6 +23,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
+        [Authorize("RocketAPI.Write")]
         public async Task<UserMatchResponseDto> AddAsync([FromBody] UserMatchRequestDto userMatchDto)
         {
             var model = mapper.Map<UserMatchModel>(userMatchDto);
@@ -32,6 +32,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpGet("user/{userId}/match/{matchId}")]
+        [Authorize("RocketAPI.Read")]
         public async Task<UserMatchResponseDto> GetByUserIdAndMatchIdAsync([FromRoute] Guid userId, [FromRoute] Guid matchId)
         {
             var response = await userMatchService.GetByUserIdAndMatchIdAsync(userId, matchId);

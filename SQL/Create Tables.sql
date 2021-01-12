@@ -1,5 +1,5 @@
 -- User Table
-CREATE TABLE [User](
+CREATE TABLE [Player](
 	ID uniqueidentifier,
 	UserName nvarchar(80) NOT NULL,
 	PlatformName nvarchar(20) NOT NULL,
@@ -10,32 +10,33 @@ CREATE TABLE [User](
 	CONSTRAINT uq_userplatform UNIQUE(PlatformName, RocketStatsID)
 );
 
--- Match Table
+-- Match Table Used to Marry up the Rocket Stats Matches
 CREATE TABLE [Match](
 	ID uniqueidentifier,
-	RocketStatsID uniqueidentifier NOT NULL,
 	GameMode nvarchar(40) NOT NULL,
-	MatchDate Datetime2 NOT NULL
-	
+	MatchDate Datetime2 NOT NULL,
+
 	PRIMARY KEY (ID),
-	UNIQUE(RocketStatsID)
 );
 
 -- UserMatch Table.  One Player game have many matches and one match can have many players
-CREATE TABLE UserMatch(
+CREATE TABLE PlayerMatch(
 	ID uniqueidentifier,
 	UserID uniqueidentifier NOT NULL,
-	MatchID uniqueidentifier NOT NULL,
-	Victory nvarchar(20) NOT NULL-- 0 = loss, 1 = win
+	MatchID uniqueidentifier,
+	Victory nvarchar(20) NOT NULL,
+	RocketStatsID uniqueidentifier NOT NULL,
+	RocketStatsGameMode nvarchar(40) NOT NULL,
+	RocketStatsMatchDate Datetime2 NOT NULL
 	
 	PRIMARY KEY (ID),
-	FOREIGN KEY (UserID) REFERENCES [User](ID),
+	FOREIGN KEY (UserID) REFERENCES [Player](ID),
 	FOREIGN KEY (MatchID) REFERENCES [Match](ID),
 	CONSTRAINT uq_usermatch UNIQUE(MatchID, UserID)
 );
 
 -- Tracks overall user stats globally and by gamemode type
-CREATE TABLE UserStatistics(
+CREATE TABLE PlayerStatistics(
 	ID uniqueidentifier,
 	UserID uniqueidentifier NOT NULL,
 	GameMode nvarchar(40) NOT NULL,
@@ -45,11 +46,11 @@ CREATE TABLE UserStatistics(
 	[Value] int -- Total # of that stat
 
 	PRIMARY KEY (ID),
-	FOREIGN KEY (UserID) REFERENCES [User](ID)
+	FOREIGN KEY (UserID) REFERENCES [Player](ID)
 );
 
 -- Tracks stats for users for each match
-CREATE TABLE MatchStatistics(
+CREATE TABLE PlayerMatchStatistics(
 	ID uniqueidentifier,
 	UserID uniqueidentifier NOT NULL,
 	MatchID uniqueidentifier NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE MatchStatistics(
 	[Value] int NOT NULL-- Total # of that stat
 
 	PRIMARY KEY (ID),
-	FOREIGN KEY (UserID) REFERENCES [User](ID),
+	FOREIGN KEY (UserID) REFERENCES [Player](ID),
 	FOREIGN KEY (MatchID) REFERENCES [Match](ID),
 	CONSTRAINT uq_usermatchstat UNIQUE(UserId, MatchId, StatType)
 );

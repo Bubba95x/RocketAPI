@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 namespace API.RocketStats.Controllers
 {
     [Route("api/match")]
-    [Authorize]
     [ApiController]
     public class MatchController
     {
@@ -24,6 +23,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpGet("{ID}")]
+        [Authorize("RocketAPI.Read")]
         public async Task<MatchResponseDto> GetAsync([FromRoute] Guid ID)
         {
             var response = await matchService.GetAsync(ID);
@@ -31,6 +31,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpGet("rocketstatsid/{ID}")]
+        [Authorize("RocketAPI.Read")]
         public async Task<MatchResponseDto> GetByRocketStatsIDAsync([FromRoute] Guid ID)
         {
             var response = await matchService.GetByRocketStatsIDAsync(ID);
@@ -38,6 +39,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
+        [Authorize("RocketAPI.Write")]
         public async Task<MatchResponseDto> AddAsync([FromBody] MatchRequestDto matchDto)
         {
             var model = mapper.Map<MatchModel>(matchDto);
