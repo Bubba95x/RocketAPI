@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace API.RocketStats.Controllers
 {
     [Route("api/matchstatistic")]
-    [Authorize]
     [ApiController]
     public class MatchStatisticsController
     {
@@ -23,6 +22,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
+        [Authorize("RocketAPI.Write")]
         public async Task<MatchStatisticResponseDto> AddAsync([FromBody] MatchStatisticRequestDto matchStatisticDto)
         {
             var model = mapper.Map<MatchStatisticModel>(matchStatisticDto);
