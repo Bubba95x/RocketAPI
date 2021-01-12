@@ -36,7 +36,7 @@ CREATE TABLE PlayerMatch(
 );
 
 -- Tracks overall user stats globally and by gamemode type
-CREATE TABLE PlayerStatistics(
+CREATE TABLE PlayerStatistic(
 	ID uniqueidentifier,
 	UserID uniqueidentifier NOT NULL,
 	GameMode nvarchar(40) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE PlayerStatistics(
 );
 
 -- Tracks stats for users for each match
-CREATE TABLE PlayerMatchStatistics(
+CREATE TABLE PlayerMatchStatistic(
 	ID uniqueidentifier,
 	UserID uniqueidentifier NOT NULL,
 	MatchID uniqueidentifier NOT NULL,
@@ -62,3 +62,10 @@ CREATE TABLE PlayerMatchStatistics(
 	FOREIGN KEY (MatchID) REFERENCES [Match](ID),
 	CONSTRAINT uq_usermatchstat UNIQUE(UserId, MatchId, StatType)
 );
+
+-- Default Values
+insert into [RocketLeague].[dbo].[Player](ID, UserName, PlatformName, AvatarUrl, RocketStatsID)
+  values
+	('84a18143-8edb-491e-994a-ff0337c9122e', 'Bubba95', 'steam', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/85/851fcbd1daeb41ad2caf5f2d065eba7c7ad4fa7b_full.jpg', '76561198086766952'),
+	('ed1d0182-2ca9-4102-8bc4-6be617dd1681', 'QuietFork', 'psn', 'https://avatar-cdn.tracker.gg/api/avatar/2/quietfork.png', 'quietfork'),
+	('7d645b0c-b3e8-4959-a7c2-3cac52ec1f7b', 'ClearanceSaleWine', 'steam', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ac/ac7151bcde2e1b58fe683ee341ad50b4667e302e_full.jpg', '76561198305303574')

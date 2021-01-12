@@ -12,24 +12,24 @@ namespace API.RocketStats.AutoMapper
             // Dto to Model
             CreateMap<MatchRequestDto, MatchModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
-            CreateMap<MatchStatisticRequestDto, MatchStatisticModel>()
+            CreateMap<PlayerMatchStatisticRequestDto, PlayerMatchStatisticModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
-            CreateMap<UserMatchRequestDto, UserMatchModel>()
+            CreateMap<PlayerMatchRequestDto, PlayerMatchModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
-            CreateMap<UserRequestDto, UserModel>()
+            CreateMap<PlayerRequestDto, PlayerModel>()
                 .ForMember(dest => dest.ID, op => op.Ignore());
 
             // Model to Dto
             CreateMap<MatchModel, MatchResponseDto>();
-            CreateMap<MatchStatisticModel, MatchStatisticResponseDto>();
-            CreateMap<UserMatchModel, UserMatchResponseDto>();
-            CreateMap<UserModel, UserResponseDto>();
+            CreateMap<PlayerMatchStatisticModel, PlayerMatchStatisticResponseDto>();
+            CreateMap<PlayerMatchModel, PlayerMatchResponseDto>();
+            CreateMap<PlayerModel, PlayerResponseDto>();
 
             // Model - Entity            
             CreateMap<MatchModel, MatchEntity>().ReverseMap();
-            CreateMap<MatchStatisticModel, MatchStatisticsEntity>().ReverseMap();
-            CreateMap<UserMatchEntity, UserMatchModel>().ReverseMap();
-            CreateMap<UserModel, UserEntity>().ReverseMap();
+            CreateMap<PlayerMatchStatisticModel, PlayerMatchStatisticEntity>().ReverseMap();
+            CreateMap<PlayerMatchEntity, PlayerMatchModel>().ReverseMap();
+            CreateMap<PlayerModel, PlayerEntity>().ReverseMap();
         }
     }
 }

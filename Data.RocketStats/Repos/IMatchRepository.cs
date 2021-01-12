@@ -8,6 +8,5 @@ namespace Data.RocketStats.Repos
     {
         Task<MatchEntity> AddAsync(MatchEntity entity);
         Task<MatchEntity> GetAsync(Guid ID);
-        Task<MatchEntity> GetByRocketStatsIDAsync(Guid ID);
     }
 }

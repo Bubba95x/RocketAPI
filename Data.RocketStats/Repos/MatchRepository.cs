@@ -25,10 +25,5 @@ namespace Data.RocketStats.Repos
         {
             return await dbContext.Match.FirstOrDefaultAsync(x => x.ID == ID);
         }
-
-        public async Task<MatchEntity> GetByRocketStatsIDAsync(Guid ID)
-        {
-            return await dbContext.Match.FirstOrDefaultAsync(x => x.RocketStatsID == ID);
-        }
     }
 }
