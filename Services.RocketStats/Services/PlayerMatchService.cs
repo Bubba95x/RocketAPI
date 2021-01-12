@@ -10,24 +10,37 @@ namespace Services.RocketStats.Services
     public class PlayerMatchService : IPlayerMatchService
     {
         private readonly IMapper mapper;
-        private readonly IPlayerMatchRepository userMatchRepository;
+        private readonly IPlayerMatchRepository playerMatchRepository;
 
         public PlayerMatchService(IMapper mapper, IPlayerMatchRepository userMatchRepository)
         {
             this.mapper = mapper;
-            this.userMatchRepository = userMatchRepository;
+            this.playerMatchRepository = userMatchRepository;
         }
 
         public async Task<PlayerMatchModel> AddAsync(PlayerMatchModel model)
         {
             var entity = mapper.Map<PlayerMatchEntity>(model);
-            var response = await userMatchRepository.AddAsync(entity);
+            var response = await playerMatchRepository.AddAsync(entity);
+            return mapper.Map<PlayerMatchModel>(response);
+        }
+
+        public async Task<PlayerMatchModel> UpdateAsync(PlayerMatchModel model)
+        {
+            var entity = mapper.Map<PlayerMatchEntity>(model);
+            var response = await playerMatchRepository.UpdateAsync(entity);
+            return mapper.Map<PlayerMatchModel>(response);
+        }
+
+        public async Task<PlayerMatchModel> GetAsync(Guid ID)
+        {
+            var response = await playerMatchRepository.GetAsync(ID);
             return mapper.Map<PlayerMatchModel>(response);
         }
 
         public async Task<PlayerMatchModel> GetByUserIdAndMatchIdAsync(Guid userId, Guid matchId)
         {
-            var response = await userMatchRepository.GetByUserIdAndMatchIdAsync(userId, matchId);
+            var response = await playerMatchRepository.GetByUserIdAndMatchIdAsync(userId, matchId);
             return mapper.Map<PlayerMatchModel>(response);
         }
     }
