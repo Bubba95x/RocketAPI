@@ -38,6 +38,12 @@ namespace Services.RocketStats.Services
             return mapper.Map<PlayerMatchModel>(response);
         }
 
+        public async Task<PlayerMatchModel> GetByRocketStatsIDAsync(Guid rocketStatsID)
+        {
+            var response = await playerMatchRepository.GetByRocketStatsIDAsync(rocketStatsID);
+            return mapper.Map<PlayerMatchModel>(response);
+        }
+
         public async Task<PlayerMatchModel> GetByUserIdAndMatchIdAsync(Guid userId, Guid matchId)
         {
             var response = await playerMatchRepository.GetByUserIdAndMatchIdAsync(userId, matchId);

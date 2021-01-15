@@ -49,6 +49,14 @@ namespace API.RocketStats.Controllers
             return mapper.Map<PlayerMatchResponseDto>(response);
         }
 
+        [HttpGet("rocketstatsid/{rocketStatsID}")]
+        [Authorize("RocketAPI.Read")]
+        public async Task<PlayerMatchResponseDto> GetByRocketStatsIDAsync([FromRoute] Guid rocketStatsID)
+        {
+            var response = await playerMatchService.GetByRocketStatsIDAsync(rocketStatsID);
+            return mapper.Map<PlayerMatchResponseDto>(response);
+        }
+
         [HttpGet("user/{userId}/match/{matchId}")]
         [Authorize("RocketAPI.Read")]
         public async Task<PlayerMatchResponseDto> GetByUserIdAndMatchIdAsync([FromRoute] Guid userId, [FromRoute] Guid matchId)

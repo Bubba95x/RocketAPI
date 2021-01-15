@@ -39,6 +39,11 @@ namespace Data.RocketStats.Repos
             return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.ID == ID);
         }
 
+        public async Task<PlayerMatchEntity> GetByRocketStatsIDAsync(Guid rocketStatsID)
+        {
+            return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.RocketStatsID == rocketStatsID);
+        }
+
         public async Task<PlayerMatchEntity> GetByUserIdAndMatchIdAsync(Guid userId, Guid matchId)
         {
             return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.UserID == userId && x.MatchID == matchId);

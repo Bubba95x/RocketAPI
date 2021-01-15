@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Templates", "Templates", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{B2EF6127-CFEF-4535-B576-61FEC47D52BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.RocketStats.UnitTests", "Tests\API.RocketStats.UnitTests\API.RocketStats.UnitTests.csproj", "{212A09D9-94ED-4492-BF70-794BE54B345E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,9 +37,16 @@ Global
 		{52F23188-543D-4E38-BD46-73F95367FFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52F23188-543D-4E38-BD46-73F95367FFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52F23188-543D-4E38-BD46-73F95367FFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212A09D9-94ED-4492-BF70-794BE54B345E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212A09D9-94ED-4492-BF70-794BE54B345E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212A09D9-94ED-4492-BF70-794BE54B345E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212A09D9-94ED-4492-BF70-794BE54B345E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{212A09D9-94ED-4492-BF70-794BE54B345E} = {B2EF6127-CFEF-4535-B576-61FEC47D52BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F371B2A7-2863-410F-8263-24E2443D6BF4}
