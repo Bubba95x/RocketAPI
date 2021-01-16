@@ -14,12 +14,12 @@ namespace API.RocketStats.Controllers
     public class PlayerMatchController
     {
         private readonly IMapper mapper;
-        private readonly IPlayerMatchService userMatchService;
+        private readonly IPlayerMatchService playerMatchService;
 
         public PlayerMatchController(IMapper mapper, IPlayerMatchService userMatchService)
         {
             this.mapper = mapper;
-            this.userMatchService = userMatchService;
+            this.playerMatchService = userMatchService;
         }
 
         [HttpPost("")]
@@ -27,7 +27,33 @@ namespace API.RocketStats.Controllers
         public async Task<PlayerMatchResponseDto> AddAsync([FromBody] PlayerMatchRequestDto userMatchDto)
         {
             var model = mapper.Map<PlayerMatchModel>(userMatchDto);
-            var response = await userMatchService.AddAsync(model);
+            var response = await playerMatchService.AddAsync(model);
+            return mapper.Map<PlayerMatchResponseDto>(response);
+        }
+
+        [HttpPut("{ID}")]
+        [Authorize("RocketAPI.Write")]
+        public async Task<PlayerMatchResponseDto> UpdateAsync([FromRoute] Guid ID, [FromBody] PlayerMatchRequestDto userMatchDto)
+        {
+            var model = mapper.Map<PlayerMatchModel>(userMatchDto);
+            model.ID = ID;
+            var response = await playerMatchService.UpdateAsync(model);
+            return mapper.Map<PlayerMatchResponseDto>(response);
+        }
+
+        [HttpGet("{ID}")]
+        [Authorize("RocketAPI.Read")]
+        public async Task<PlayerMatchResponseDto> GetAsync([FromRoute] Guid ID)
+        {
+            var response = await playerMatchService.GetAsync(ID);
+            return mapper.Map<PlayerMatchResponseDto>(response);
+        }
+
+        [HttpGet("rocketstatsid/{rocketStatsID}")]
+        [Authorize("RocketAPI.Read")]
+        public async Task<PlayerMatchResponseDto> GetByRocketStatsIDAsync([FromRoute] Guid rocketStatsID)
+        {
+            var response = await playerMatchService.GetByRocketStatsIDAsync(rocketStatsID);
             return mapper.Map<PlayerMatchResponseDto>(response);
         }
 
@@ -35,7 +61,7 @@ namespace API.RocketStats.Controllers
         [Authorize("RocketAPI.Read")]
         public async Task<PlayerMatchResponseDto> GetByUserIdAndMatchIdAsync([FromRoute] Guid userId, [FromRoute] Guid matchId)
         {
-            var response = await userMatchService.GetByUserIdAndMatchIdAsync(userId, matchId);
+            var response = await playerMatchService.GetByUserIdAndMatchIdAsync(userId, matchId);
             return mapper.Map<PlayerMatchResponseDto>(response);
         }
     }

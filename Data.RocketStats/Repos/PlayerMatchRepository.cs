@@ -21,6 +21,29 @@ namespace Data.RocketStats.Repos
             return response.Entity;
         }
 
+        public async Task<PlayerMatchEntity> UpdateAsync(PlayerMatchEntity entity)
+        {
+            var existing = await dbContext.FindAsync<PlayerMatchEntity>(entity.ID); // Pass by reference
+            if (existing is null)
+            {
+                return null;
+            }
+
+            dbContext.Entry(existing).CurrentValues.SetValues(entity);
+            await dbContext.SaveChangesAsync();
+            return existing;
+        }
+
+        public async Task<PlayerMatchEntity> GetAsync(Guid ID)
+        {
+            return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.ID == ID);
+        }
+
+        public async Task<PlayerMatchEntity> GetByRocketStatsIDAsync(Guid rocketStatsID)
+        {
+            return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.RocketStatsID == rocketStatsID);
+        }
+
         public async Task<PlayerMatchEntity> GetByUserIdAndMatchIdAsync(Guid userId, Guid matchId)
         {
             return await dbContext.PlayerMatch.FirstOrDefaultAsync(x => x.UserID == userId && x.MatchID == matchId);

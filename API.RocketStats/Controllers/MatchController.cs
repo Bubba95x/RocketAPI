@@ -22,14 +22,6 @@ namespace API.RocketStats.Controllers
             this.matchService = matchService;
         }
 
-        [HttpGet("{ID}")]
-        [Authorize("RocketAPI.Read")]
-        public async Task<MatchResponseDto> GetAsync([FromRoute] Guid ID)
-        {
-            var response = await matchService.GetAsync(ID);
-            return mapper.Map<MatchResponseDto>(response);
-        }
-
         [HttpPost("")]
         [Authorize("RocketAPI.Write")]
         public async Task<MatchResponseDto> AddAsync([FromBody] MatchRequestDto matchDto)
@@ -38,5 +30,13 @@ namespace API.RocketStats.Controllers
             var response = await matchService.AddAsync(model);
             return mapper.Map<MatchResponseDto>(response);
         }
+
+        [HttpGet("{ID}")]
+        [Authorize("RocketAPI.Read")]
+        public async Task<MatchResponseDto> GetAsync([FromRoute] Guid ID)
+        {
+            var response = await matchService.GetAsync(ID);
+            return mapper.Map<MatchResponseDto>(response);
+        }        
     }
 }
