@@ -2,7 +2,7 @@
 
 namespace Services.RocketStats.Models
 {
-    public class PlayerMatchModel
+    public class PlayerMatchModel : BaseModel
     {
         public Guid ID { get; set; }
         public Guid UserID { get; set; }

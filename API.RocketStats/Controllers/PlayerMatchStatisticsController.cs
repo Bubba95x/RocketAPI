@@ -1,4 +1,5 @@
-﻿using API.RocketStats.Dtos;
+﻿using API.RocketStats.Dtos.Request;
+using API.RocketStats.Dtos.Response;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

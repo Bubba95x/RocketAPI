@@ -2,7 +2,7 @@
 
 namespace Data.RocketStats.Entities
 {
-    public class MatchEntity
+    public class MatchEntity : BaseEntity
     {
         public Guid ID { get; set; }
         public string GameMode { get; set; }

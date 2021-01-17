@@ -1,11 +1,12 @@
-﻿using API.RocketStats.Dtos;
-using AutoMapper;
+﻿using AutoMapper;
 using Services.RocketStats.Models;
 using Services.RocketStats.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using API.RocketStats.Dtos.Response;
+using API.RocketStats.Dtos.Request;
 
 namespace API.RocketStats.Controllers
 {

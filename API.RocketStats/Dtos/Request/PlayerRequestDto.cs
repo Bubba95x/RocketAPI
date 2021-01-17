@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.RocketStats.Dtos
+namespace API.RocketStats.Dtos.Request
 {
     public class PlayerRequestDto
     {
