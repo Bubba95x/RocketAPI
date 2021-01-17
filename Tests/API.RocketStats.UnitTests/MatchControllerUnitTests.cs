@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Moq;
-using System.Text;
 using System.Threading.Tasks;
 using Services.RocketStats.Services;
 using AutoMapper;
 using API.RocketStats.AutoMapper;
 using Xunit;
 using Bogus;
-using API.RocketStats.Dtos;
 using API.RocketStats.Controllers;
 using Services.RocketStats.Models;
+using API.RocketStats.Dtos.Response;
+using API.RocketStats.Dtos.Request;
 
 namespace API.RocketStats.UnitTests
 {

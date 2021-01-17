@@ -1,8 +1,9 @@
-﻿using System;
+﻿using API.RocketStats.Dtos.Request;
+using System;
 
-namespace Services.RocketStats.Models
+namespace API.RocketStats.Dtos.Response
 {
-    public class MatchModel : BaseModel
+    public class MatchResponseDto : BaseResponseDto
     {
         public Guid ID { get; set; }
         public string GameMode { get; set; }

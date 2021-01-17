@@ -2,7 +2,7 @@
 
 namespace Data.RocketStats.Entities
 {
-    public class PlayerStatisticsEntity
+    public class PlayerStatisticsEntity : BaseEntity
     {
         public Guid ID { get; set; }
         public Guid UserID { get; set; }

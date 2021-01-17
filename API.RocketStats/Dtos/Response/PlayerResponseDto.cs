@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using API.RocketStats.Dtos.Request;
+using System;
 
-namespace API.RocketStats.Dtos
+namespace API.RocketStats.Dtos.Response
 {
-    public class PlayerRequestDto
+    public class PlayerResponseDto : BaseResponseDto
     {
-        [Required]
+        public Guid ID { get; set; }
         public string UserName { get; set; }
-        [Required]
         public string PlatformName { get; set; }
         public string AvatarUrl { get; set; }
-        [Required]
         public string RocketStatsID { get; set; }
     }
 }

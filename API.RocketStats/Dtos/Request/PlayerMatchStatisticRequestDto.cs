@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace API.RocketStats.Dtos
+namespace API.RocketStats.Dtos.Request
 {
     public class PlayerMatchStatisticRequestDto
     {
         [Required]
-        public Guid UserID { get; set; }
-        [Required]
-        public Guid MatchID { get; set; }
+        public Guid PlayerMatchId { get; set; }
         [Required]
         public string StatType { get; set; }
         [Required]

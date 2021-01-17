@@ -1,15 +1,20 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Services.RocketStats.Models
+namespace API.RocketStats.Dtos.Request
 {
-    public class PlayerMatchModel : BaseModel
+    public class PlayerMatchRequestDto
     {
-        public Guid ID { get; set; }
+        [Required]
         public Guid UserID { get; set; }
         public Guid? MatchID { get; set; }
+        [Required]
         public string Victory { get; set; }
+        [Required]
         public Guid RocketStatsID { get; set; }
+        [Required]
         public string RocketStatsGameMode { get; set; }
+        [Required]
         public DateTime RocketStatsMatchDate { get; set; }
     }
 }

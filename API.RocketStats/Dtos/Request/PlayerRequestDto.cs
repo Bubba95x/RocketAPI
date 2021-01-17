@@ -1,13 +1,15 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Data.RocketStats.Entities
+namespace API.RocketStats.Dtos.Request
 {
-    public class PlayerEntity : BaseEntity
+    public class PlayerRequestDto
     {
-        public Guid ID { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string PlatformName { get; set; }
         public string AvatarUrl { get; set; }
+        [Required]
         public string RocketStatsID { get; set; }
     }
 }
