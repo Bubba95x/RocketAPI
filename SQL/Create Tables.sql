@@ -26,7 +26,7 @@ CREATE TABLE [Match](
 -- UserMatch Table.  One Player game have many matches and one match can have many players
 CREATE TABLE PlayerMatch(
 	ID uniqueidentifier,
-	UserID uniqueidentifier NOT NULL,
+	PlayerID uniqueidentifier NOT NULL,
 	MatchID uniqueidentifier,
 	Victory nvarchar(20) NOT NULL,
 	RocketStatsID uniqueidentifier NOT NULL,
@@ -36,15 +36,15 @@ CREATE TABLE PlayerMatch(
 	DateCreatedUTC DateTime2 NOT NULL,
 	
 	PRIMARY KEY (ID),
-	FOREIGN KEY (UserID) REFERENCES [Player](ID),
+	FOREIGN KEY (PlayerID) REFERENCES [Player](ID),
 	FOREIGN KEY (MatchID) REFERENCES [Match](ID),
-	CONSTRAINT uq_usermatch UNIQUE(MatchID, UserID)
+	CONSTRAINT uq_usermatch UNIQUE(MatchID, PlayerID)
 );
 
 -- Tracks overall user stats globally and by gamemode type
 CREATE TABLE PlayerStatistic(
 	ID uniqueidentifier,
-	UserID uniqueidentifier NOT NULL,
+	PlayerID uniqueidentifier NOT NULL,
 	GameMode nvarchar(40) NOT NULL,
 	StatType nvarchar(20) NOT NULL,
 	[Rank] int,
@@ -54,7 +54,7 @@ CREATE TABLE PlayerStatistic(
 	DateCreatedUTC DateTime2 NOT NULL,
 
 	PRIMARY KEY (ID),
-	FOREIGN KEY (UserID) REFERENCES [Player](ID)
+	FOREIGN KEY (PlayerID) REFERENCES [Player](ID)
 );
 
 -- Tracks stats for users for each match
@@ -74,6 +74,6 @@ CREATE TABLE PlayerMatchStatistic(
 -- Default Values
 insert into [RocketLeague].[dbo].[Player](ID, UserName, PlatformName, AvatarUrl, RocketStatsID, DateModifiedUTC, DateCreatedUTC)
   values
-	('84a18143-8edb-491e-994a-ff0337c9122e', 'Bubba95', 'steam', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/85/851fcbd1daeb41ad2caf5f2d065eba7c7ad4fa7b_full.jpg', '76561198086766952', SYSUTCDATETIME(), SYSUTCDATETIME()),
+	('84a18143-8edb-491e-994a-ff0337c9122e', 'Bubba95x', 'steam', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/85/851fcbd1daeb41ad2caf5f2d065eba7c7ad4fa7b_full.jpg', '76561198086766952', SYSUTCDATETIME(), SYSUTCDATETIME()),
 	('ed1d0182-2ca9-4102-8bc4-6be617dd1681', 'QuietFork', 'psn', 'https://avatar-cdn.tracker.gg/api/avatar/2/quietfork.png', 'quietfork', SYSUTCDATETIME(), SYSUTCDATETIME()),
 	('7d645b0c-b3e8-4959-a7c2-3cac52ec1f7b', 'ClearanceSaleWine', 'steam', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ac/ac7151bcde2e1b58fe683ee341ad50b4667e302e_full.jpg', '76561198305303574', SYSUTCDATETIME(), SYSUTCDATETIME())

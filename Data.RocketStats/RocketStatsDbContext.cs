@@ -23,7 +23,7 @@ namespace Data.RocketStats
         public DbSet<PlayerEntity> Player { get; set; }        
         public DbSet<PlayerMatchEntity> PlayerMatch { get; set; }
         public DbSet<PlayerMatchStatisticEntity> PlayerMatchStatistic { get; set; }
-        public DbSet<PlayerStatisticsEntity> PlayerStatistic { get; set; }
+        public DbSet<PlayerStatisticEntity> PlayerStatistic { get; set; }
 
         public override int SaveChanges()
         {
