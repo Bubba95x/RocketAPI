@@ -1,5 +1,4 @@
-﻿using API.RocketStats.Dtos.Request;
-using System;
+﻿using System;
 
 namespace API.RocketStats.Dtos.Response
 {

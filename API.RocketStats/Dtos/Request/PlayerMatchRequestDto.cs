@@ -6,7 +6,7 @@ namespace API.RocketStats.Dtos.Request
     public class PlayerMatchRequestDto
     {
         [Required]
-        public Guid UserID { get; set; }
+        public Guid PlayerID { get; set; }
         public Guid? MatchID { get; set; }
         [Required]
         public string Victory { get; set; }

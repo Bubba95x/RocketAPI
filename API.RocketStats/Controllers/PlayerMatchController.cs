@@ -58,11 +58,11 @@ namespace API.RocketStats.Controllers
             return mapper.Map<PlayerMatchResponseDto>(response);
         }
 
-        [HttpGet("user/{userId}/match/{matchId}")]
+        [HttpGet("player/{playerId}/match/{matchId}")]
         [Authorize("RocketAPI.Read")]
-        public async Task<PlayerMatchResponseDto> GetByUserIdAndMatchIdAsync([FromRoute] Guid userId, [FromRoute] Guid matchId)
+        public async Task<PlayerMatchResponseDto> GetByUserIdAndMatchIdAsync([FromRoute] Guid playerId, [FromRoute] Guid matchId)
         {
-            var response = await playerMatchService.GetByUserIdAndMatchIdAsync(userId, matchId);
+            var response = await playerMatchService.GetByUserIdAndMatchIdAsync(playerId, matchId);
             return mapper.Map<PlayerMatchResponseDto>(response);
         }
     }

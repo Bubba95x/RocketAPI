@@ -1,12 +1,11 @@
-﻿using API.RocketStats.Dtos.Request;
-using System;
+﻿using System;
 
 namespace API.RocketStats.Dtos.Response
 {
     public class PlayerMatchResponseDto : BaseResponseDto
     {
         public Guid ID { get; set; }
-        public Guid UserID { get; set; }
+        public Guid PlayerID { get; set; }
         public Guid? MatchID { get; set; }
         public string Victory { get; set; }
         public Guid RocketStatsID { get; set; }
