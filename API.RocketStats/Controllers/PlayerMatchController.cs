@@ -24,7 +24,7 @@ namespace API.RocketStats.Controllers
         }
 
         [HttpPost("")]
-        [Authorize("RocketAPI.Write")]
+        [Authorize("RocketAPI.Read")]
         public async Task<PlayerMatchResponseDto> AddAsync([FromBody] PlayerMatchRequestDto userMatchDto)
         {
             var model = mapper.Map<PlayerMatchModel>(userMatchDto);

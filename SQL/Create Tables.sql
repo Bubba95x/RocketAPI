@@ -38,7 +38,7 @@ CREATE TABLE PlayerMatch(
 	PRIMARY KEY (ID),
 	FOREIGN KEY (PlayerID) REFERENCES [Player](ID),
 	FOREIGN KEY (MatchID) REFERENCES [Match](ID),
-	CONSTRAINT uq_usermatch UNIQUE(MatchID, PlayerID)
+	CONSTRAINT uq_RocketStatsID UNIQUE(RocketStatsID)
 );
 
 -- Tracks overall user stats globally and by gamemode type
@@ -67,8 +67,7 @@ CREATE TABLE PlayerMatchStatistic(
 	DateCreatedUTC DateTime2 NOT NULL,
 
 	PRIMARY KEY (ID),
-	FOREIGN KEY (PlayerMatchId) REFERENCES [PlayerMatch](ID),
-	CONSTRAINT uq_playermatch UNIQUE(PlayerMatchId, StatType)
+	FOREIGN KEY (PlayerMatchId) REFERENCES [PlayerMatch](ID)	
 );
 
 -- Default Values

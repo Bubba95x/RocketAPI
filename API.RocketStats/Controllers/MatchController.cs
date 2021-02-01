@@ -12,7 +12,7 @@ namespace API.RocketStats.Controllers
 {
     [Route("api/match")]
     [ApiController]
-    public class MatchController
+    public class MatchController : ControllerBase
     {
         private readonly IMapper mapper;
         private readonly IMatchService matchService;

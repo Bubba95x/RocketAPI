@@ -64,8 +64,10 @@ namespace API.RocketStats.StartUp
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }            
+                //app.UseDeveloperExceptionPage();
+            }
+            app.UseExceptionHandler(ExceptionHandler.Handler());
+            //app.UseExceptionHandler("/error");
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
